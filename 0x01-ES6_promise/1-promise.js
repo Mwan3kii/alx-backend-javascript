@@ -5,8 +5,12 @@ export default function getFullResponseFromAPI(success) {
         status: 200,
         body: 'Success'
       });
+      console.log(response);
+      resolve(response);
     } else {
-        reject(new Error('The fake API is not working currently'));
+      const error = new Error('The fake API is not working currently');
+      console.error(error);
+      reject(error);
     }
   });
 }
