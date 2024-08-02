@@ -40,3 +40,15 @@ export function createEmployee(firstName: string, lastName: string, salary: numb
   }
   return new Director();
 }
+
+export function isDirector(employee: DirectorInterface | TeacherInterface): employee is DirectorInterface {
+  return (employee as DirectorInterface).workDirectorTasks !== undefined;
+}
+
+function executeWork(employee: DirectorInterface | TeacherInterface): void {
+  if (isDirector(employee)) {
+    console.log(employee.workDirectorTasks());
+  } else {
+  console.log(employee.workTeacherTasks());
+  }
+}
