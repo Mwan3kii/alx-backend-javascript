@@ -5,21 +5,21 @@ function countStudents(path) {
     const data = fs.readFileSync(path, 'utf8');
     const lines = data.split('\n').filter(line => line.trim() !== '');
     const header = lines.shift();
-    const studentsByField = {};
+    const students = {};
     lines.forEach(line => {
       const [firstName, , , field] = line.split(',');
 
       if (field) {
-        if (!studentsByField[field]) {
-          studentsByField[field] = [];
+        if (!students[field]) {
+          students[field] = [];
         }
-        studentsByField[field].push(firstName);
+        students[field].push(firstName);
       }
     });
     console.log(`Number of students: ${lines.length}`);
-    for (const field in studentsByField) {
-      const students = studentsByField[field];
-      console.log(`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`);
+    for (const field in students) {
+      const student = students[field];
+      console.log(`Number of students in ${field}: ${student.length}. List: ${student.join(', ')}`);
     }
   } catch (error) {
     throw new Error('Cannot load the database');
