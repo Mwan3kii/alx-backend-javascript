@@ -7,10 +7,8 @@ process.stdin.on('data', (data) => {
   process.stdout.write(`Your name is: ${input}\n`); // Using stdout.write to avoid automatic newline
 
   // Close stdin after input is received
-  process.stdin.end();
+  process.exit();
 });
-
-// When stdin is closed, display the closing message
-process.stdin.on('end', () => {
+process.on('exit', () => {
   process.stdout.write('This important software is now closing\n');
 });
