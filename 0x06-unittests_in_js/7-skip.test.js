@@ -10,7 +10,7 @@ describe('Testing numbers', () => {
   });
 
   it.skip('1 is equal to 3', () => {
-    expect(1 === 3).to.be.true; // This test is deliberately failing and will be skipped
+    expect(1 === 3).to.be.true; // This will deliberately fail and will be skipped
   });
 
   it('3 is equal to 3', () => {
