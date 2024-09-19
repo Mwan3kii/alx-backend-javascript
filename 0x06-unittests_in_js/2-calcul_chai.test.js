@@ -1,5 +1,5 @@
-import { expect } from 'chai'; // Correct import for chai expect
-import calculateNumber from './2-calcul_chai.js';
+const { expect } = require('chai');
+const calculateNumber = require('./2-calcul_chai');
 
 describe('calculateNumber', function () {
   describe('SUM', function () {
