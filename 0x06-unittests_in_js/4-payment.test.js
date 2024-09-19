@@ -5,16 +5,16 @@ const sendPaymentRequestToApi = require('./4-payment');
 
 describe('sendPaymentRequestToApi', () => {
   it('sendPaymentRequestToApi calls console.log with the right arguments', () => {
-    const bigBrother = sinon.spy(console);
-    const dummy = sinon.stub(Utils, 'calculateNumber');
+    const spyD = sinon.spy(console);
+    const stubD = sinon.stub(Utils, 'calculateNumber');
 
-    dummy.returns(10);
+    stubD.returns(10);
     sendPaymentRequestToApi(100, 20);
-    expect(dummy.calledWith('SUM', 100, 20)).to.be.true;
-    expect(dummy.callCount).to.be.equal(1);
-    expect(bigBrother.log.calledWith('The total is: 10')).to.be.true;
-    expect(bigBrother.log.callCount).to.be.equal(1);
-    dummy.restore();
-    bigBrother.log.restore();
+    expect(stubD.calledWith('SUM', 100, 20)).to.be.true;
+    expect(stubD.callCount).to.be.equal(1);
+    expect(spyD.log.calledWith('The total is: 10')).to.be.true;
+    expect(spyD.log.callCount).to.be.equal(1);
+    stubD.restore();
+    spyD.log.restore();
   });
 });
