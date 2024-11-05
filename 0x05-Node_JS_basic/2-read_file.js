@@ -3,11 +3,9 @@ const fs = require('fs');
 function countStudents(path) {
   try {
     const data = fs.readFileSync(path, 'utf-8');
-    const lines = data.split('\n').filter((line) => line.trim() !== ''); // Filter out empty lines
+    const lines = data.split('\n').filter((line) => line.trim() !== '');
 
-    // Remove header row
-    const rows = lines.slice(1);
-
+    const rows = lines.slice(1); // Remove header row
     const students = {};
     let totalStudents = 0;
 
