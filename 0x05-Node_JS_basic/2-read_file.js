@@ -2,23 +2,37 @@ const fs = require('fs');
 
 function countStudents(path) {
   try {
-    const data = fs.readFileSync(path, 'utf8');
-    const result = [];
-    data.split('\n').forEach((data) => {
-      result.push(data.split(','));
+    const data = fs.readFileSync(path, 'utf-8');
+    const lines = data.split('\n').filter((line) => line.trim() !== '');
+
+    const rows = lines.slice(1); // Remove header row
+    const students = {};
+    let totalStudents = 0;
+
+    rows.forEach((row) => {
+      const fields = row.split(',');
+
+      if (fields.length >= 4) {
+        const firstname = fields[0].trim();
+        const field = fields[3].trim();
+
+        if (firstname && field) {
+          totalStudents += 1;
+
+          if (!students[field]) {
+            students[field] = [];
+          }
+          students[field].push(firstname);
+        }
+      }
     });
-    result.shift();
-    const newis = [];
-    result.forEach((data) => newis.push([data[0], data[3]]));
-    const fields = new Set();
-    newis.forEach((item) => fields.add(item[1]));
-    const final = {};
-    fields.forEach((data) => { (final[data] = 0); });
-    newis.forEach((data) => { (final[data[1]] += 1); });
-    console.log(`Number of students: ${result.filter((check) => check.length > 3).length}`);
-    Object.keys(final).forEach((data) => console.log(`Number of students in ${data}: ${final[data]}. List: ${newis.filter((n) => n[1] === data).map((n) => n[0]).join(', ')}`));
-  } catch (E) {
-    throw Error('Cannot load the database');
+
+    console.log(`Number of students: ${totalStudents}`);
+    for (const [field, names] of Object.entries(students)) {
+      console.log(`Number of students in ${field}: ${names.length}. List: ${names.join(', ')}`);
+    }
+  } catch (error) {
+    throw new Error('Cannot load the database');
   }
 }
 
